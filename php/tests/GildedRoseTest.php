@@ -82,4 +82,6 @@ class GildedRoseTest extends TestCase
         $gildedRose->updateQuality();
         $this->assertSame(36, $items[0]->quality);
     }
+
+
 }
