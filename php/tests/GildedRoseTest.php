@@ -83,5 +83,11 @@ class GildedRoseTest extends TestCase
         $this->assertSame(36, $items[0]->quality);
     }
 
-
+    public function testConjurasDoubleDecrease(): void
+    {
+        $items = [new Item('Conjured Mana Cake', 10, 36)];
+        $gildedRose = new GildedRose($items);
+        $gildedRose->updateQuality();
+        $this->assertSame(34, $items[0]->quality);
+    }
 }

@@ -43,7 +43,11 @@ final class GildedRose
                 {
                     break;
                 }
-
+                case self::CONJURAS:{
+                    if($item->quality > 0) $item->quality -= 2;
+                    if($item->sellIn < 0 and $item->quality > 0) $item->quality -=2;
+                    break;
+                }
                 default:{
                     if($item->quality > 0) $item->quality--;
                     if($item->sellIn < 0 and $item->quality > 0) $item->quality--;
