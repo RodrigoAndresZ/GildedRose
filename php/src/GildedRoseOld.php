@@ -1,14 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace GildedRose;
 
-final class GildedRose
+final class GildedRoseOld
+
 {
-    const BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert';
-    const BRIE = 'Aged Brie';
-    const SULFURAS = 'Sulfuras, Hand of Ragnaros';
 
     /**
      * @param Item[] $items
@@ -22,10 +18,16 @@ final class GildedRose
     {
         foreach ($this->items as $item) {
 
-            if ($item->name == self::BRIE or $item->name == self::BACKSTAGE) {
+            if ($item->name != 'Aged Brie' and $item->name != 'Backstage passes to a TAFKAL80ETC concert') {
+                if ($item->quality > 0) {
+                    if ($item->name != 'Sulfuras, Hand of Ragnaros') {
+                        $item->quality = $item->quality - 1;
+                    }
+                }
+            } else { //Queso, y Backstage
                 if ($item->quality < 50) {
                     $item->quality = $item->quality + 1;
-                    if ($item->name == self::BACKSTAGE) {
+                    if ($item->name == 'Backstage passes to a TAFKAL80ETC concert') {
                         if ($item->sellIn < 11) {
                             if ($item->quality < 50) {
                                 $item->quality = $item->quality + 1;
@@ -38,25 +40,17 @@ final class GildedRose
                         }
                     }
                 }
-            } else {
-                if ($item->quality > 0) {
-                    if ($item->name != self::SULFURAS) {
-                        $item->quality = $item->quality - 1;
-                    }
-                }
-
-
             }
 
-            if ($item->name != self::SULFURAS) {
+            if ($item->name != 'Sulfuras, Hand of Ragnaros') {
                 $item->sellIn = $item->sellIn - 1;
             }
 
             if ($item->sellIn < 0) {
-                if ($item->name != self::BRIE) {
-                    if ($item->name != self::BACKSTAGE) {
+                if ($item->name != 'Aged Brie') {
+                    if ($item->name != 'Backstage passes to a TAFKAL80ETC concert') {
                         if ($item->quality > 0) {
-                            if ($item->name != self::SULFURAS) {
+                            if ($item->name != 'Sulfuras, Hand of Ragnaros') {
                                 $item->quality = $item->quality - 1;
                             }
                         }
